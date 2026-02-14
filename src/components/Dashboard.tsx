@@ -3,39 +3,50 @@
 import { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { modules } from "@/data/modules";
+import type { DayModule } from "@/data/modules";
 import DayCarousel from "./DayCarousel";
 import ProfileSidebar from "./ProfileSidebar";
 import DayContent from "./DayContent";
 
+function buildCheckedMap(
+  mods: DayModule[],
+  saved?: Record<string, boolean[]>
+): Record<number, boolean[]> {
+  const map: Record<number, boolean[]> = {};
+  mods.forEach((mod) => {
+    const savedArr = saved?.[String(mod.day)];
+    if (savedArr && savedArr.length === mod.items.length) {
+      // Saved progress matches current item count — restore it
+      map[mod.day] = savedArr;
+    } else {
+      // No saved data or item count changed — reset
+      map[mod.day] = new Array(mod.items.length).fill(false);
+    }
+  });
+  return map;
+}
+
 export default function Dashboard() {
   const router = useRouter();
+  const [modules, setModules] = useState<DayModule[]>([]);
   const [selectedDay, setSelectedDay] = useState(1);
   const [email, setEmail] = useState("");
   const [loaded, setLoaded] = useState(false);
 
-  // Track checked items per day: { [day]: boolean[] }
   const [checkedItemsMap, setCheckedItemsMap] = useState<
     Record<number, boolean[]>
-  >(() => {
-    const map: Record<number, boolean[]> = {};
-    modules.forEach((mod) => {
-      map[mod.day] = new Array(mod.items.length).fill(false);
-    });
-    return map;
-  });
+  >({});
 
-  // Track completed days
   const [completedDays, setCompletedDays] = useState<Set<number>>(new Set());
 
-  // Ref to track if we need to save
   const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Load user session and progress
+  // Load modules, user session, and progress
   useEffect(() => {
     async function load() {
       try {
-        const [meRes, progressRes] = await Promise.all([
+        const [modulesRes, meRes, progressRes] = await Promise.all([
+          fetch("/api/modules"),
           fetch("/api/auth/me"),
           fetch("/api/progress"),
         ]);
@@ -45,32 +56,26 @@ export default function Dashboard() {
           return;
         }
 
+        const modulesData = await modulesRes.json();
+        const mods: DayModule[] = modulesData.modules;
+        setModules(mods);
+
         const meData = await meRes.json();
         setEmail(meData.email);
 
+        let savedChecked: Record<string, boolean[]> | undefined;
+        let savedCompleted: number[] | undefined;
+
         if (progressRes.ok) {
           const progressData = await progressRes.json();
+          savedChecked = progressData.checkedItems;
+          savedCompleted = progressData.completedDays;
+        }
 
-          // Restore checked items
-          if (progressData.checkedItems) {
-            setCheckedItemsMap((prev) => {
-              const restored = { ...prev };
-              for (const [dayStr, items] of Object.entries(
-                progressData.checkedItems
-              )) {
-                const day = parseInt(dayStr);
-                if (restored[day]) {
-                  restored[day] = items as boolean[];
-                }
-              }
-              return restored;
-            });
-          }
+        setCheckedItemsMap(buildCheckedMap(mods, savedChecked));
 
-          // Restore completed days
-          if (progressData.completedDays) {
-            setCompletedDays(new Set(progressData.completedDays as number[]));
-          }
+        if (savedCompleted) {
+          setCompletedDays(new Set(savedCompleted));
         }
       } catch {
         router.push("/login");
@@ -103,7 +108,7 @@ export default function Dashboard() {
     []
   );
 
-  const currentModule = modules.find((m) => m.day === selectedDay)!;
+  const currentModule = modules.find((m) => m.day === selectedDay);
   const currentChecked = checkedItemsMap[selectedDay] ?? [];
 
   const handleToggleItem = useCallback(
@@ -135,12 +140,12 @@ export default function Dashboard() {
     router.push("/login");
   }, [router]);
 
-  // Calculate overall progress
   const progress = useMemo(() => {
+    if (modules.length === 0) return 0;
     return (completedDays.size / modules.length) * 100;
-  }, [completedDays]);
+  }, [completedDays, modules.length]);
 
-  if (!loaded) {
+  if (!loaded || modules.length === 0) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
         <p className="text-sm text-muted">Loading...</p>
@@ -178,19 +183,20 @@ export default function Dashboard() {
 
       {/* Main layout: content */}
       <div className="flex flex-1 justify-center px-4 pb-12 pt-4 lg:px-8">
-        {/* Main scrollable content */}
         <main className="flex w-full max-w-2xl justify-center">
-          <DayContent
-            module={currentModule}
-            checkedItems={currentChecked}
-            onToggleItem={handleToggleItem}
-            onMarkDone={handleMarkDone}
-            isDayComplete={completedDays.has(selectedDay)}
-          />
+          {currentModule && (
+            <DayContent
+              module={currentModule}
+              checkedItems={currentChecked}
+              onToggleItem={handleToggleItem}
+              onMarkDone={handleMarkDone}
+              isDayComplete={completedDays.has(selectedDay)}
+            />
+          )}
         </main>
       </div>
 
-      {/* Fixed logo — bottom left (mobile only, since desktop has it in the sidebar group) */}
+      {/* Fixed logo — bottom left (mobile only) */}
       <div className="fixed bottom-6 left-6 z-30 md:hidden">
         <Image
           src="/logo.png"

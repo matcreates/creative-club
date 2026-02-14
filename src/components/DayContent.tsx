@@ -17,12 +17,20 @@ export default function DayContent({
   onMarkDone,
   isDayComplete,
 }: DayContentProps) {
-  const allChecked = checkedItems.every(Boolean);
+  const allChecked = checkedItems.length > 0 && checkedItems.every(Boolean);
 
   return (
     <div className="w-full max-w-2xl rounded-2xl bg-white p-8 shadow-sm sm:p-10">
-      {/* Day label */}
-      <span className="font-serif text-sm text-muted">Day {module.day}</span>
+      {/* Day label + author */}
+      <div className="flex items-center gap-2">
+        <span className="font-serif text-sm text-muted">Day {module.day}</span>
+        {module.author && module.author !== "TBA" && (
+          <>
+            <span className="text-sm text-muted/40">·</span>
+            <span className="text-sm text-muted">{module.author}</span>
+          </>
+        )}
+      </div>
 
       {/* Title */}
       <h1 className="font-serif mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -42,16 +50,16 @@ export default function DayContent({
         {module.items.map((item, index) => (
           <label
             key={index}
-            className="group flex cursor-pointer items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-card-hover"
+            className="group flex cursor-pointer items-start gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-card-hover"
           >
             <input
               type="checkbox"
-              className="custom-checkbox"
+              className="custom-checkbox mt-0.5"
               checked={checkedItems[index] ?? false}
               onChange={() => onToggleItem(index)}
             />
             <span
-              className={`text-sm transition-colors ${
+              className={`text-sm leading-relaxed transition-colors ${
                 checkedItems[index]
                   ? "text-muted line-through"
                   : "text-foreground"
