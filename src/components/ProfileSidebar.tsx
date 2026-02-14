@@ -10,20 +10,9 @@ export default function ProfileSidebar({
   progress,
 }: ProfileSidebarProps) {
   return (
-    <div className="sticky top-8 flex w-56 flex-col items-center rounded-2xl bg-white/60 p-6 backdrop-blur-sm">
-      {/* Avatar */}
-      <div className="mb-4 h-16 w-16 overflow-hidden rounded-full bg-gradient-to-br from-amber-200 to-orange-300">
-        <svg
-          className="h-full w-full text-white/80"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-        >
-          <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
-        </svg>
-      </div>
-
+    <div className="sticky top-8 flex w-56 flex-col items-start rounded-2xl bg-white/60 p-6 backdrop-blur-sm">
       {/* Email */}
-      <p className="mb-5 text-center text-sm font-medium text-foreground/80 break-all">
+      <p className="mb-5 text-sm font-medium text-foreground/80 break-all">
         {email}
       </p>
 

@@ -56,7 +56,7 @@ export default function DayCarousel({
             >
               <div className="flex items-center justify-between">
                 <span
-                  className={`text-xs font-medium ${
+                  className={`font-serif text-sm ${
                     isSelected ? "text-foreground" : "text-muted"
                   }`}
                 >

@@ -22,10 +22,10 @@ export default function DayContent({
   return (
     <div className="w-full max-w-2xl rounded-2xl bg-white p-8 shadow-sm sm:p-10">
       {/* Day label */}
-      <span className="text-sm font-medium text-muted">Day {module.day}</span>
+      <span className="font-serif text-sm text-muted">Day {module.day}</span>
 
       {/* Title */}
-      <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+      <h1 className="font-serif mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
         {module.title}
       </h1>
 

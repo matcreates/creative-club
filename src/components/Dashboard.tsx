@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useMemo } from "react";
+import Image from "next/image";
 import { modules } from "@/data/modules";
 import DayCarousel from "./DayCarousel";
 import ProfileSidebar from "./ProfileSidebar";
@@ -65,10 +66,7 @@ export default function Dashboard() {
       <div className="flex flex-1 gap-8 px-4 pb-12 pt-4 lg:px-8">
         {/* Profile sidebar — hidden on small screens */}
         <aside className="hidden flex-shrink-0 md:block">
-          <ProfileSidebar
-            email="user@example.com"
-            progress={progress}
-          />
+          <ProfileSidebar email="user@example.com" progress={progress} />
         </aside>
 
         {/* Main scrollable content */}
@@ -81,6 +79,18 @@ export default function Dashboard() {
             isDayComplete={completedDays.has(selectedDay)}
           />
         </main>
+      </div>
+
+      {/* Fixed logo — bottom left */}
+      <div className="fixed bottom-6 left-6 z-30">
+        <Image
+          src="/logo.png"
+          alt="Creative Club"
+          width={100}
+          height={60}
+          className="opacity-60 transition-opacity hover:opacity-100"
+          priority
+        />
       </div>
     </div>
   );
