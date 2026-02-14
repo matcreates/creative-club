@@ -160,14 +160,21 @@ export default function Dashboard() {
         />
       </header>
 
-      {/* Fixed profile sidebar — hidden on small screens */}
-      <aside className="hidden md:block">
+      {/* Fixed bottom-left: profile + logo — hidden on small screens */}
+      <div className="fixed bottom-6 left-6 z-30 hidden flex-col gap-4 md:flex lg:left-8">
         <ProfileSidebar
           email={email}
           progress={progress}
           onLogout={handleLogout}
         />
-      </aside>
+        <Image
+          src="/logo.png"
+          alt="Creative Club"
+          width={100}
+          height={60}
+          priority
+        />
+      </div>
 
       {/* Main layout: content */}
       <div className="flex flex-1 justify-center px-4 pb-12 pt-4 lg:px-8">
@@ -183,8 +190,8 @@ export default function Dashboard() {
         </main>
       </div>
 
-      {/* Fixed logo — bottom left */}
-      <div className="fixed bottom-6 left-6 z-30">
+      {/* Fixed logo — bottom left (mobile only, since desktop has it in the sidebar group) */}
+      <div className="fixed bottom-6 left-6 z-30 md:hidden">
         <Image
           src="/logo.png"
           alt="Creative Club"
