@@ -12,7 +12,7 @@ export default function ProfileSidebar({
   onLogout,
 }: ProfileSidebarProps) {
   return (
-    <div className="fixed top-[110px] left-6 z-20 flex w-56 flex-col items-start rounded-2xl bg-white/60 p-6 backdrop-blur-sm lg:left-8">
+    <div className="fixed bottom-24 left-6 z-20 flex w-56 flex-col items-start rounded-2xl bg-white/60 p-6 backdrop-blur-sm lg:left-8">
       {/* Email */}
       <p className="mb-5 text-sm font-medium text-foreground/80 break-all">
         {email}

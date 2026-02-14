@@ -170,15 +170,9 @@ export default function Dashboard() {
       </aside>
 
       {/* Main layout: content */}
-      <div className="flex flex-1 px-4 pb-12 pt-4 lg:px-8">
-        {/* Spacer for fixed sidebar */}
-        <div
-          className="hidden w-56 flex-shrink-0 md:block"
-          aria-hidden="true"
-        />
-
+      <div className="flex flex-1 justify-center px-4 pb-12 pt-4 lg:px-8">
         {/* Main scrollable content */}
-        <main className="flex flex-1 justify-center">
+        <main className="flex w-full max-w-2xl justify-center">
           <DayContent
             module={currentModule}
             checkedItems={currentChecked}
