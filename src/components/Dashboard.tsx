@@ -62,12 +62,15 @@ export default function Dashboard() {
         />
       </header>
 
-      {/* Main layout: sidebar + content */}
-      <div className="flex flex-1 gap-8 px-4 pb-12 pt-4 lg:px-8">
-        {/* Profile sidebar — hidden on small screens */}
-        <aside className="hidden flex-shrink-0 md:block">
-          <ProfileSidebar email="user@example.com" progress={progress} />
-        </aside>
+      {/* Fixed profile sidebar — hidden on small screens */}
+      <aside className="hidden md:block">
+        <ProfileSidebar email="user@example.com" progress={progress} />
+      </aside>
+
+      {/* Main layout: content */}
+      <div className="flex flex-1 px-4 pb-12 pt-4 lg:px-8">
+        {/* Spacer for fixed sidebar */}
+        <div className="hidden w-56 flex-shrink-0 md:block" aria-hidden="true" />
 
         {/* Main scrollable content */}
         <main className="flex flex-1 justify-center">

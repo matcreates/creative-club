@@ -34,7 +34,7 @@ export default function DayCarousel({
     <div className="w-full">
       <div
         ref={scrollRef}
-        className="scrollbar-hide flex gap-3 overflow-x-auto px-4 pb-2 pt-1"
+        className="scrollbar-hide flex gap-3 overflow-x-auto pl-6 pr-4 pb-2 pt-1 lg:pl-8"
       >
         {modules.map((mod) => {
           const isSelected = mod.day === selectedDay;
