@@ -46,12 +46,21 @@ export const metadata: Metadata = {
     url: "https://creativeclub.pro",
     siteName: "Creative Club",
     type: "website",
+    images: [
+      {
+        url: "https://creativeclub.pro/og-cover.png",
+        width: 1200,
+        height: 630,
+        alt: "Creative Club",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Creative Club",
     description:
       "A community and studio for bold creators, designers, and makers.",
+    images: ["https://creativeclub.pro/og-cover.png"],
   },
 };
 
