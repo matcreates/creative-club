@@ -38,10 +38,10 @@ export async function POST(request: Request) {
     await createSession({ userId: user.id, email: user.email });
 
     return NextResponse.json({ success: true, email: user.email });
-  } catch {
-    return NextResponse.json(
-      { error: "Something went wrong" },
-      { status: 500 }
-    );
+  } catch (err: unknown) {
+    const message =
+      err instanceof Error ? err.message : "Unknown error occurred";
+    console.error("Register error:", err);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
