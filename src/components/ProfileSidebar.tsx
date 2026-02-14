@@ -3,11 +3,13 @@
 interface ProfileSidebarProps {
   email: string;
   progress: number; // 0 to 100
+  onLogout: () => void;
 }
 
 export default function ProfileSidebar({
   email,
   progress,
+  onLogout,
 }: ProfileSidebarProps) {
   return (
     <div className="fixed top-[110px] left-6 z-20 flex w-56 flex-col items-start rounded-2xl bg-white/60 p-6 backdrop-blur-sm lg:left-8">
@@ -31,6 +33,14 @@ export default function ProfileSidebar({
           />
         </div>
       </div>
+
+      {/* Logout */}
+      <button
+        onClick={onLogout}
+        className="mt-5 cursor-pointer text-xs text-muted transition-colors hover:text-foreground"
+      >
+        Sign out
+      </button>
     </div>
   );
 }
