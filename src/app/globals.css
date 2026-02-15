@@ -74,18 +74,21 @@ body {
   border-color: #a09a92;
 }
 
-/* Reward sparkle animation */
-@keyframes sparkle-float {
+/* Reward confetti animation */
+@keyframes confetti-burst {
   0% {
-    opacity: 0;
-    transform: translate(0, 0) scale(0);
-  }
-  20% {
     opacity: 1;
-    transform: scale(1.2);
+    transform: translate(0, 0) rotate(0deg) scale(0);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  80% {
+    opacity: 1;
   }
   100% {
     opacity: 0;
-    transform: translate(var(--dx, 50px), var(--dy, -100px)) scale(0);
+    transform: translate(var(--dx, 50px), var(--dy, -100px)) rotate(var(--rot, 360deg)) scale(0.3);
   }
 }
