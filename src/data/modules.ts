@@ -4,6 +4,7 @@ export interface DayModule {
   author: string;
   description: string;
   items: string[];
+  reward: string;
 }
 
 export const modules: DayModule[] = [
@@ -20,6 +21,8 @@ export const modules: DayModule[] = [
       "Defining one clear product idea",
       "Clarifying target user & main goal",
     ],
+    reward:
+      "A clear product vision and website strategy you can pitch to any client with confidence.",
   },
   {
     day: 2,
@@ -34,6 +37,8 @@ export const modules: DayModule[] = [
       "Designing a clean homepage",
       "Structuring key sections (hero, value, CTA)",
     ],
+    reward:
+      "A professional Figma homepage design ready to be turned into a real website.",
   },
   {
     day: 3,
@@ -48,6 +53,8 @@ export const modules: DayModule[] = [
       'Making the site "good enough to sell"',
       "Publishing a live or shareable version",
     ],
+    reward:
+      "A live, shareable website you built from your own design — ready to show clients.",
   },
   {
     day: 4,
@@ -60,6 +67,8 @@ export const modules: DayModule[] = [
       "Duplicate and adapt the design quickly with AI",
       "Customize copy and branding for a specific company",
     ],
+    reward:
+      "A reusable website template system you can personalize for any client in minutes.",
   },
   {
     day: 5,
@@ -72,6 +81,8 @@ export const modules: DayModule[] = [
       "Use the prompt I shared to make research with ChatGPT on this industry",
       "Create a No-Brainer offer",
     ],
+    reward:
+      "A niche-specific, no-brainer offer that makes prospects say yes immediately.",
   },
   {
     day: 6,
@@ -86,6 +97,8 @@ export const modules: DayModule[] = [
       "How to schedule a meeting (ask for their email, and open Google Calendar)",
       "Or use Cal.com if you close via messages",
     ],
+    reward:
+      "A full pipeline of prospects with their contact info, ready for outreach.",
   },
   {
     day: 7,
@@ -102,6 +115,8 @@ export const modules: DayModule[] = [
       "Collect a review",
       "Ask for referral",
     ],
+    reward:
+      "The skills and scripts to close your first paying client and get a 5-star review.",
   },
   // Days 8–30: Coming soon
   ...Array.from({ length: 23 }, (_, i) => ({
@@ -110,5 +125,6 @@ export const modules: DayModule[] = [
     author: "TBA",
     description: "This module is coming soon. Stay tuned!",
     items: ["Content coming soon"],
+    reward: "Coming soon!",
   })),
 ];

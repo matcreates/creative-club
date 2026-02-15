@@ -7,6 +7,7 @@ import type { DayModule } from "@/data/modules";
 import DayCarousel from "./DayCarousel";
 import ProfileSidebar from "./ProfileSidebar";
 import DayContent from "./DayContent";
+import RewardModal from "./RewardModal";
 
 function buildCheckedMap(
   mods: DayModule[],
@@ -38,6 +39,7 @@ export default function Dashboard() {
   >({});
 
   const [completedDays, setCompletedDays] = useState<Set<number>>(new Set());
+  const [rewardDay, setRewardDay] = useState<number | null>(null);
 
   const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -132,6 +134,7 @@ export default function Dashboard() {
         saveProgress(checkedItemsMap, newSet);
         return newSet;
       });
+      setRewardDay(selectedDay);
     }
   }, [selectedDay, currentChecked, checkedItemsMap, saveProgress]);
 
@@ -206,6 +209,18 @@ export default function Dashboard() {
           priority
         />
       </div>
+
+      {/* Reward modal */}
+      {rewardDay !== null && (() => {
+        const rewardModule = modules.find((m) => m.day === rewardDay);
+        return rewardModule ? (
+          <RewardModal
+            day={rewardDay}
+            reward={rewardModule.reward}
+            onClose={() => setRewardDay(null)}
+          />
+        ) : null;
+      })()}
     </div>
   );
 }

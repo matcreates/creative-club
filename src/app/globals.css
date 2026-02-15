@@ -73,3 +73,19 @@ body {
 .custom-checkbox:hover {
   border-color: #a09a92;
 }
+
+/* Reward sparkle animation */
+@keyframes sparkle-float {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx, 50px), var(--dy, -100px)) scale(0);
+  }
+}
