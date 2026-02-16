@@ -72,51 +72,45 @@ export const modules: DayModule[] = [
   },
   {
     day: 5,
-    title: "Positioning & The Offer",
+    title: "Offer & Pricing",
     author: "Adrien",
     description:
-      "Find your niche and craft an offer so good that prospects can't say no.",
+      "Finalize your offer and pricing, then share it with the community for feedback.",
     items: [
-      "Pick an industry",
-      "Use the prompt I shared to make research with ChatGPT on this industry",
-      "Create a No-Brainer offer",
+      'Write a recap post titled: "Day 5 - My Final Offer"',
+      "Include your final offer and pricing",
+      "Comment on 5 members' offers",
     ],
-    reward:
-      "A niche-specific, no-brainer offer that makes prospects say yes immediately.",
+    reward: "$300 Gemini API credit",
   },
   {
     day: 6,
-    title: "Outreach Masterclass",
+    title: "Outreach Execution",
     author: "Adrien",
     description:
-      "Master the art of finding and reaching out to potential clients using proven scripts and tools.",
+      "Put your outreach plan into action and report your results to the community.",
     items: [
-      "Go to Google Maps, and search for your industry",
-      "Scrap all their info with the extension Data Scraper",
-      "DM, or cold call them using the script I sent you (tell them that you've just built a brand new website for them for free, and that you'd like to show it to them on a meeting)",
-      "How to schedule a meeting (ask for their email, and open Google Calendar)",
-      "Or use Cal.com if you close via messages",
+      'Write a recap post titled: "Day 6 - Outreach Report"',
+      "Include number of contacts, replies, and meetings",
+      "Comment on 5 members' outreach recaps",
     ],
     reward:
-      "A full pipeline of prospects with their contact info, ready for outreach.",
+      "Perplexity — 3 months free on the Enterprise Pro plan (up to 50 seats)",
   },
   {
     day: 7,
-    title: "Closing Your First Client",
+    title: "Closing Momentum",
     author: "Adrien",
     description:
-      "Everything you need to know to run the meeting, close the deal, and get paid.",
+      "Share your closing results and reflect on what you've learned during this 7-day sprint.",
     items: [
-      "Make sure they join the meeting: strategies to avoid no-show",
-      "Prepare the site demo",
-      "Follow the script",
-      "Handle objections",
-      "Send Stripe payment link",
-      "Collect a review",
-      "Ask for referral",
+      'Write a recap post titled: "Day 7 - Closing Result"',
+      "Include outcome (won / pending / lessons)",
+      "Share what you've learned from this 7-day challenge",
+      "Comment on 5 members' Day 7 posts",
     ],
     reward:
-      "The skills and scripts to close your first paying client and get a 5-star review.",
+      "Full Refund of Creative Club if you complete the 30-day challenge",
   },
   // Days 8–30: Coming soon
   ...Array.from({ length: 23 }, (_, i) => ({
